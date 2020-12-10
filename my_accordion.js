@@ -152,7 +152,7 @@ export default class Accordion {
     });
   }
   
-  // レスポンシブでパネル内の高さが変動した時に高さを再計算する
+  // レスポンシブで画面幅が変動した時に高さを再計算する
   adjustHeight() {
     this.selector.panels.forEach(panel => {
       window.addEventListener('resize', () => {
