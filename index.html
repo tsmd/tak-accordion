@@ -51,8 +51,13 @@
 <script src="my_accordion.js" type="module"></script>
 <script type="module">
   import Accordion from './my_accordion.js';
-  const accordion = new Accordion();
-  accordion.init();
+  Array.from(document.querySelectorAll('.js-accordion')).forEach((el) => {
+    const accordion = new Accordion(el, {
+      tabs: '.js-accordion-tab',
+      panels: '.js-accordion-panel',
+    });
+    accordion.toggleItem(0, true, { noTransition: true });
+  });
 </script>
 </body>
 </html>
