@@ -1,4 +1,28 @@
-class Accordion {
+/**
+ * @example
+ * <div class="my-accordion js-accordion">
+ *  <section class="my-accordion__item">
+ *    <h2 class="my-accordion__headline">
+ *      <button type="button" class="my-accordion__tab js-accordion-tab">
+ *      見出し
+ *        <span class="my-accordion__tabicon" aria-label="タブを開閉する"></span>
+ *      </button>
+ *    </h2>
+ *    <div class="my-accordion__panel js-accordion-panel">
+ *      <div class="my-accordion__panel-content">
+ *        <p>テキスト</p>
+ *      </div>
+ *    </div>
+ *  </section>
+ *  
+ *  ...
+ *  
+ * </div>
+ *
+ * @codepen https://codepen.io/tak-dcxi/pen/yLaaJYj 
+ **/
+
+export default class Accordion {
   constructor(setting) {
     const defaultSetting = {
       // アコーディオンコンポーネントに付与するclass
