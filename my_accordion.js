@@ -24,8 +24,8 @@
 
 const defaultOptions = {
   // アコーディオンのパネルの開閉時のtransitionを指定
-  timingFunction: 'ease-out',
-  duration: '.3s',
+  timingFunction: "ease-out",
+  duration: ".3s",
   // 複数開けるようにするか
   openMultiple: false,
 };
@@ -36,10 +36,10 @@ export default class Accordion {
 
     // 必須オプションをチェックする
     if (!options.tabs) {
-      throw TypeError('tabs オプションは必須です');
+      throw TypeError("tabs オプションは必須です");
     }
     if (!options.panels) {
-      throw TypeError('panels オプションは必須です');
+      throw TypeError("panels オプションは必須です");
     }
 
     // タブとパネルを取ってくる
@@ -48,9 +48,11 @@ export default class Accordion {
 
     // イベントハンドラを設定する
     const subscriptions = [
-      ...tabs.map((tab) => attachEvent(tab, 'click', (e) => this.handleTabClick(e))),
-      attachEvent(window, 'resize', (e) => this.handleResize(e)),
-    ]
+      ...tabs.map((tab) =>
+        attachEvent(tab, "click", (e) => this.handleTabClick(e))
+      ),
+      attachEvent(window, "resize", (e) => this.handleResize(e)),
+    ];
 
     this.element = element;
     this.tabs = tabs;
@@ -65,7 +67,7 @@ export default class Accordion {
   destroy() {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
-    })
+    });
   }
 
   handleTabClick(event) {
@@ -80,26 +82,26 @@ export default class Accordion {
   }
 
   prepareAttributes() {
-    const randomId = 'accordion-' + Math.random().toString(36).slice(2);
+    const randomId = "accordion-" + Math.random().toString(36).slice(2);
 
     // アコーディオンコンポーネントのタブに付与する属性
     this.tabs.forEach((tab, index) => {
-      tab.setAttribute('id', `${randomId}-tab-${index}`);
-      tab.setAttribute('aria-expanded', "false");
-      tab.setAttribute('aria-controls', `${randomId}-panel-${index}`);
+      tab.setAttribute("id", `${randomId}-tab-${index}`);
+      tab.setAttribute("aria-expanded", "false");
+      tab.setAttribute("aria-controls", `${randomId}-panel-${index}`);
     });
 
     // アコーディオンコンポーネントのパネルに付与する属性
     this.panels.forEach((panel, index) => {
-      panel.setAttribute('id', `${randomId}-panel-${index}`);
-      panel.setAttribute('aria-hidden', "true");
-      panel.style.boxSizing = 'border-box';
-      panel.style.overflow = 'hidden';
-      panel.style.maxHeight = '0px';
+      panel.setAttribute("id", `${randomId}-panel-${index}`);
+      panel.setAttribute("aria-hidden", "true");
+      panel.style.boxSizing = "border-box";
+      panel.style.overflow = "hidden";
+      panel.style.maxHeight = "0px";
     });
   }
 
-  toggleItem(itemIndex, expand, {noTransition = false} = {}) {
+  toggleItem(itemIndex, expand, { noTransition = false } = {}) {
     const isItemExpanded = this.expanded.has(itemIndex);
 
     if (expand === isItemExpanded) {
@@ -109,15 +111,17 @@ export default class Accordion {
     const updateItemAttribute = (itemIndex, expand) => {
       const targetTab = this.tabs[itemIndex];
       const targetPanel = this.panels[itemIndex];
-      targetTab.setAttribute('aria-expanded', String(expand));
-      targetPanel.setAttribute('aria-hidden', String(!expand));
-      targetPanel.style.maxHeight = expand ? targetPanel.children[0].clientHeight + 'px' : '0px';
-      targetPanel.style.visibility = expand ? 'visible' : 'hidden';
-      targetPanel.style.transition = noTransition ?
-        '' :
-        `max-height ${this.options.timingFunction} ${this.options.duration}, visibility ${this.options.duration}`;
-      this.expanded[expand ? 'add' : 'delete'](itemIndex);
-    }
+      targetTab.setAttribute("aria-expanded", String(expand));
+      targetPanel.setAttribute("aria-hidden", String(!expand));
+      targetPanel.style.maxHeight = expand
+        ? targetPanel.children[0].clientHeight + "px"
+        : "0px";
+      targetPanel.style.visibility = expand ? "visible" : "hidden";
+      targetPanel.style.transition = noTransition
+        ? ""
+        : `max-height ${this.options.timingFunction} ${this.options.duration}, visibility ${this.options.duration}`;
+      this.expanded[expand ? "add" : "delete"](itemIndex);
+    };
 
     // 複数選択可能の設定がされていない時は開いているパネルをすべて閉じる
     if (!this.options.openMultiple && !isItemExpanded) {
@@ -132,7 +136,7 @@ export default class Accordion {
     this.expanded.forEach((index) => {
       const panel = this.panels[index];
       const resizedHeight = panel.children[0].clientHeight;
-      panel.style.maxHeight = resizedHeight + 'px';
+      panel.style.maxHeight = resizedHeight + "px";
     });
   }
 }
@@ -142,6 +146,6 @@ function attachEvent(element, event, handler, options) {
   return {
     unsubscribe() {
       element.removeEventListener(event, handler);
-    }
-  }
+    },
+  };
 }
