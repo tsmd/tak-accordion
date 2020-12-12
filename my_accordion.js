@@ -48,8 +48,8 @@ export default class Accordion {
 
     // イベントハンドラを設定する
     const subscriptions = [
-      ...tabs.map((tab) => attachEvent(tab, 'click', this.handleTabClick.bind(this))),
-      attachEvent(window, 'resize', this.handleResize.bind(this)),
+      ...tabs.map((tab) => attachEvent(tab, 'click', (e) => this.handleTabClick(e))),
+      attachEvent(window, 'resize', (e) => this.handleResize(e)),
     ]
 
     this.element = element;
