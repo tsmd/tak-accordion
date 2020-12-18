@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>TAK’s Accordion</title>
+  <link rel="stylesheet" href="my_accordion.css">
+</head>
+<body>
+<div class="my-accordion js-accordion">
+  <section class="my-accordion__item">
+    <h2 class="my-accordion__headline">
+      <button type="button" class="my-accordion__tab js-accordion-tab">
+        チコリータ
+        <span class="my-accordion__tabicon" aria-label="タブを開閉する"></span>
+      </button>
+    </h2>
+    <div class="my-accordion__panel js-accordion-panel">
+      <div class="my-accordion__panel-content">
+        <p>あたまのハッパから　ほのかに　あまい　かおりが　ただよう。<br>おとなしくて　ひざしを　あびるのが　だいすき。</p>
+      </div>
+    </div>
+  </section>
+  <section class="my-accordion__item">
+    <h2 class="my-accordion__headline">
+      <button type="button" class="my-accordion__tab js-accordion-tab">
+        ヒノアラシ
+        <span class="my-accordion__tabicon" aria-label="タブを開閉する"></span>
+      </button>
+    </h2>
+    <div class="my-accordion__panel js-accordion-panel">
+      <div class="my-accordion__panel-content">
+        <p>おくびょうで　いつも　からだを　まるめている。おそわれると　せなかの　ほのおを　もえあがらせ　みをまもる。</p>
+      </div>
+    </div>
+  </section>
+  <section class="my-accordion__item">
+    <h2 class="my-accordion__headline">
+      <button type="button" class="my-accordion__tab js-accordion-tab">
+        ワニノコ
+        <span class="my-accordion__tabicon" aria-label="タブを開閉する"></span>
+      </button>
+    </h2>
+    <div class="my-accordion__panel js-accordion-panel">
+      <div class="my-accordion__panel-content">
+        <p>はったつした　あごは　パワフルで　なんでも　かみくだいて　しまうので　おやのトレーナーでも　ようちゅうい。</p>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="my_accordion.js" type="module"></script>
+<script type="module">
+  import Accordion from './my_accordion.js';
+  Array.from(document.querySelectorAll('.js-accordion')).forEach((el) => {
+    const accordion = new Accordion(el, {
+      tabs: '.js-accordion-tab',
+      panels: '.js-accordion-panel',
+    });
+    accordion.toggleItem(0, true, { noTransition: true });
+  });
+</script>
+</body>
+</html>

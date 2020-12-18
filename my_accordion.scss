@@ -1,0 +1,121 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+body {
+  background: #f7f7f7;
+  color: #3a3a3a;
+  font-family: 'Helvetica Neue', 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  overflow-y: scroll;
+  padding: 5%;
+}
+
+.my-accordion {
+  max-width: 640px;
+  word-break: break-all;
+
+  @media screen and (min-width:0) {
+    font-size: .875rem;
+  }
+
+  @media screen and (min-width:768px) {
+    font-size: 1rem;
+  }
+}
+
+.my-accordion__item {
+  border: #ddd 1px solid;
+
+  & + & {
+    margin-top: 1em;
+  }
+}
+
+.my-accordion__headline {
+  background-color: #555;
+  color: #fefefe;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.my-accordion__tab {
+  $_activeColor: #858585;
+
+  align-items: center;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  padding: 1em 1.5em;
+  text-align: left;
+  transition: background-color .3s;
+  width: 100%;
+
+  &[aria-expanded='true'],
+  &.focus-visible {
+    background-color: $_activeColor;
+  }
+
+  @media (hover) {
+    &:hover {
+      background-color: $_activeColor;
+    }
+  }
+}
+
+.my-accordion__tabicon {
+  display: inline-block;
+  height: 1em;
+  margin-left: 1em;
+  pointer-events: none;
+  position: relative;
+  width: 1em;
+
+  &::before,
+  &::after {
+    background-color: currentColor;
+    bottom: 0;
+    content: '';
+    display: inline-block;
+    height: 2px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  &::after {
+    transform: rotate(90deg);
+    transition: transform .3s;
+  }
+
+  .my-accordion [aria-expanded='true'] & {
+    &::after {
+      transform: rotate(0);
+    }
+  }
+}
+
+.my-accordion__panel-content {
+  line-height: 1.75;
+  padding: 1.5em;
+}
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: 0;
+}
